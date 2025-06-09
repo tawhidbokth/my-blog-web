@@ -30,8 +30,21 @@ const MobileMenu = ({ isOpen, onClose }) => {
         >
           Contact
         </Link>
-        <button className="w-full mt-4 bg-indigo-600 text-white px-4 py-2 rounded-md text-base font-medium hover:bg-indigo-700 transition-colors">
-          Subscribe
+        <button className="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 transition-colors">
+          <Link
+            href="/register"
+            className=" hover:text-indigo-600 px-3 py-2 text-sm font-medium"
+          >
+            Register
+          </Link>
+        </button>
+        <button className="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 transition-colors">
+          <Link
+            href="/login"
+            className=" hover:text-indigo-600 px-3 py-2 text-sm font-medium"
+          >
+            LogIn
+          </Link>
         </button>
       </div>
     </div>

@@ -57,7 +57,20 @@ const Navbar = () => {
                 Contact
               </Link>
               <button className="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 transition-colors">
-                Subscribe
+                <Link
+                  href="/register"
+                  className=" hover:text-indigo-600 px-3 py-2 text-sm font-medium"
+                >
+                  Register
+                </Link>
+              </button>
+              <button className="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 transition-colors">
+                <Link
+                  href="/login"
+                  className=" hover:text-indigo-600 px-3 py-2 text-sm font-medium"
+                >
+                  LogIn
+                </Link>
               </button>
             </div>
           </div>
