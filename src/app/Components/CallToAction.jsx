@@ -3,7 +3,7 @@ import React from 'react';
 export default function CallToAction() {
   return (
     <div>
-      <section className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-12 mt-12">
+      <section className="bg-gradient-to-r bg-amber-950 h-[300px] text-white py-12 mt-12">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             ✍️ Ready to Share Your Thoughts?
