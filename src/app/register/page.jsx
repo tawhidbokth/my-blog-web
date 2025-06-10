@@ -1,16 +1,15 @@
 'use client';
-import React, { useState } from 'react';
+
+import { registerUser } from '../actions/auth/registerUser';
 
 export default function Page() {
-  const [form, setForm] = useState({ name: '', email: '', password: '' });
-
-  const handleChange = e =>
-    setForm({ ...form, [e.target.name]: e.target.value });
-
   const handleSubmit = e => {
     e.preventDefault();
-    // Handle register logic here (API call)
-    console.log('Registering:', form);
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    registerUser({ name, email, password });
   };
   return (
     <div>
@@ -24,8 +23,6 @@ export default function Page() {
               name="name"
               type="text"
               placeholder="Full Name"
-              value={form.name}
-              onChange={handleChange}
               className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
@@ -33,8 +30,6 @@ export default function Page() {
               name="email"
               type="email"
               placeholder="Email"
-              value={form.email}
-              onChange={handleChange}
               className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
@@ -42,8 +37,6 @@ export default function Page() {
               name="password"
               type="password"
               placeholder="Password"
-              value={form.password}
-              onChange={handleChange}
               className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
