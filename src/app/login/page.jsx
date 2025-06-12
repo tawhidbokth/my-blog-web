@@ -1,16 +1,21 @@
 'use client';
-import { useState } from 'react';
+import { signIn } from 'next-auth/react';
 
 export default function Login() {
-  const [form, setForm] = useState({ email: '', password: '' });
-
-  const handleChange = e =>
-    setForm({ ...form, [e.target.name]: e.target.value });
-
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    // Handle login logic here (API call)
-    console.log('Logging in:', form);
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    // Here you would typically handle the login logic, such as calling an API
+    console.log('Login submitted:', { email, password });
+    await signIn('credentials', {
+      email,
+      password,
+      // redirect: true, // Redirect after successful login
+      // callbackUrl: '/', // Redirect to home page or any other page after login
+    });
   };
 
   return (
@@ -24,8 +29,6 @@ export default function Login() {
             name="email"
             type="email"
             placeholder="Email"
-            value={form.email}
-            onChange={handleChange}
             className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
             required
           />
@@ -33,8 +36,6 @@ export default function Login() {
             name="password"
             type="password"
             placeholder="Password"
-            value={form.password}
-            onChange={handleChange}
             className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
             required
           />

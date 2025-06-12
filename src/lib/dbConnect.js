@@ -7,7 +7,6 @@ export const collectionNameobj = {
 export default function dbConnect(collectionName) {
   const uri =
     'mongodb+srv://myBlogPlatfrom:BsvCxMqnWbkCtHTa@cluster0.yzegd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0;';
-  console.log('Connecting to MongoDB with URI:', uri);
   const client = new MongoClient(uri, {
     serverApi: {
       version: ServerApiVersion.v1,
