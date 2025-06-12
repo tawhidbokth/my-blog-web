@@ -1,5 +1,7 @@
 'use client';
+
 import { signIn } from 'next-auth/react';
+import { toast } from 'react-toastify';
 
 export default function Login() {
   const handleSubmit = async e => {
@@ -8,14 +10,18 @@ export default function Login() {
     const email = form.email.value;
     const password = form.password.value;
 
-    // Here you would typically handle the login logic, such as calling an API
-    console.log('Login submitted:', { email, password });
-    await signIn('credentials', {
+    const res = await signIn('credentials', {
       email,
       password,
-      // redirect: true, // Redirect after successful login
-      // callbackUrl: '/', // Redirect to home page or any other page after login
+      redirect: false, // We will redirect manually if success
     });
+
+    if (res?.ok) {
+      toast.success('Login successful!');
+      window.location.href = '/'; // redirect manually
+    } else {
+      toast.error('Invalid email or password!');
+    }
   };
 
   return (

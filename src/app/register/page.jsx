@@ -1,16 +1,30 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { registerUser } from '../actions/auth/registerUser';
 
 export default function Page() {
-  const handleSubmit = e => {
+  const router = useRouter();
+
+  const handleSubmit = async e => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
-    registerUser({ name, email, password });
+
+    const res = await registerUser({ name, email, password });
+
+    if (res.success) {
+      toast.success(res.message);
+      router.push('/');
+    } else {
+      toast.error(res.message);
+    }
   };
+
   return (
     <div>
       <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
