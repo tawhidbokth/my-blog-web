@@ -1,9 +1,10 @@
 import { MongoClient, ServerApiVersion } from 'mongodb';
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
 export const collectionNameobj = {
   userCollection: 'usersdb',
+  blogCollection: 'postsdb',
 };
+
 export default function dbConnect(collectionName) {
   const uri =
     'mongodb+srv://myBlogPlatfrom:BsvCxMqnWbkCtHTa@cluster0.yzegd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0;';
@@ -14,5 +15,6 @@ export default function dbConnect(collectionName) {
       deprecationErrors: true,
     },
   });
+
   return client.db('myBlogPlatfrom').collection(collectionName);
 }
