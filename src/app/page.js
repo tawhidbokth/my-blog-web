@@ -5,7 +5,7 @@ import RecentPosts from './Components/RecentPosts';
 
 export default function Home() {
   return (
-    <div className="pt-28">
+    <div className="pt-4">
       <Banner />
       <FeaturedPosts />
       <RecentPosts />
