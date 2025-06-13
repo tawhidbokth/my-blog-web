@@ -1,9 +1,24 @@
 'use client';
-
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function PostBlog() {
   const { data: session, status } = useSession();
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      router.push('/login'); // 👈 login page route
+    }
+  }, [status, router]);
+
+  if (status === 'loading') {
+    return <p>Loading...</p>; // or spinner
+  }
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -14,18 +29,28 @@ export default function PostBlog() {
     const tags = formData.tags.value.split(',').map(tag => tag.trim());
     const summary = formData.summary.value;
 
-    const postData = {
-      title,
-      date,
-      image,
-      tags,
-      summary,
-      userId: session?.user?.id || null,
-      userName: session?.user?.name || 'Anonymous',
-    };
+    const res = await fetch('/api/postblog', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title,
+        date,
+        image,
+        tags,
+        summary,
+        userId: session?.user?.id || null,
+        userName: session?.user?.name || 'Anonymous',
+      }),
+    });
 
-    console.log('Post Data:', postData);
-    // you can now POST this to your backend API
+    const data = await res.json();
+
+    if (data.success) {
+      toast.success(data.message);
+      router.push('/dashboard/myposts');
+    } else {
+      toast.error(data.message);
+    }
   };
 
   if (status === 'loading') return <p>Loading session...</p>;
